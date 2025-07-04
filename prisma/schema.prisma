@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Navio {
+  id_navio        String  @id @default(uuid())
+  nome_navio      String
+  imagem    String
+  bandeira  String
+  duvs      Duv[]   // Um navio tem várias DUVs
+}
+
+model Passageiro {
+  id_passageiro            String         @id @default(uuid())
+  nome_passageiro          String
+  foto          String
+  sid           String?        // Apenas se for tripulante
+  nacionalidade String
+  tipo          TipoPassageiro
+  duvs          DuvPassageiro[] // Participações em DUVs
+}
+
+model Duv {
+  id_duv         String            @id @default(uuid())
+  numeroDuv  String
+  dataViagem DateTime
+  navioId    String
+  navio      Navio             @relation(fields: [navioId], references: [id_navio])
+  passageiros DuvPassageiro[]  // Associação com passageiros
+}
+
+model DuvPassageiro {
+  id           String      @id @default(uuid())
+  duvId        String
+  passageiroId String
+
+  duv          Duv         @relation(fields: [duvId], references: [id_duv])
+  passageiro   Passageiro  @relation(fields: [passageiroId], references: [id_passageiro])
+
+  @@unique([duvId, passageiroId]) // Impede duplicação de passageiro na mesma DUV
+}
+
+enum TipoPassageiro {
+  PASSAGEIRO
+  TRIPULANTE
+}
