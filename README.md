@@ -144,8 +144,8 @@ A API segue os seguintes endpoints:
 
 ### Diagrama de Entidades
 
-![Diagrama de Relacionamento das Entidades](processo-seletivo-2025/images/MER.png)
+![Diagrama de Relacionamento das Entidades](/images/MER.png)
 
 ### Diagrama de Casos de Uso
 
-![Diagrama de Relacionamento das ações do usuário e do sistema](processo-seletivo-2025/images/UC.png)
+![Diagrama de Relacionamento das ações do usuário e do sistema](/images/UC.png)
