@@ -143,3 +143,9 @@ A API segue os seguintes endpoints:
 - `DELETE /duv/:id` - Remover DUV por ID
 
 ### Diagrama de Entidades
+
+![Diagrama de Relacionamento das Entidades](images\MER.png)
+
+### Diagrama de Casos de Uso
+
+![Diagrama de Relacionamento das ações do usuário e do sistema](images\UC.png)
